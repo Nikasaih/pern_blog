@@ -1,0 +1,1 @@
+sonar-scanner.bat -D"sonar.projectKey=pern_blog_backend" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=f2d1cbe599655990b1604ddadbd71a7243d14d8d"
