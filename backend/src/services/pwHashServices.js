@@ -1,7 +1,8 @@
 import { randomBytes } from "crypto";
 import { pbkdf2Sync } from "crypto";
 import config from "../config.js";
-import { UserModel } from "../models/userModel.js";
+import { UserModel } from "../models/modelsclass/usermodel.js";
+
 const { iterationNumber, characterNumber, digestAlgo, pepper } =
   config.security.password;
 
@@ -19,7 +20,7 @@ export const hashPassword = (
   return [passwordHashed, salt];
 };
 
-export const validatePassword = (userEmail, passwordSubmit) => {
+export const validatePassword = async (userEmail, passwordSubmit) => {
   const user = await UserModel.findByEmail(userEmail);
   if (!user) {
     return false;

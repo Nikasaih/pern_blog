@@ -8,4 +8,8 @@ export class UserModel extends Model {
   static findByEmail(email) {
     return UserModel.query().findOne({ email });
   }
+
+  static registerUser(user) {
+    return UserModel.query().insertAndFetch(user);
+  }
 }
