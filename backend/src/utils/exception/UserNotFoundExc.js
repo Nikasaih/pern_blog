@@ -1,3 +1,5 @@
-export const UserNotFoundExc = () => {
-  "user not found";
-};
+export class UserNotFoundExc extends Error {
+  constructor() {
+    super("user not found");
+  }
+}

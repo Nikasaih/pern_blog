@@ -1,3 +1,5 @@
-export const EmailUnavailableExc = () => {
-  "Email not available";
-};
+export class EmailUnavailableExc extends Error {
+  constructor() {
+    super("Email not available");
+  }
+}

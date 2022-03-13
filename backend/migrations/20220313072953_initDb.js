@@ -18,7 +18,7 @@ export const up = async (knex) => {
     table.text("content");
     table.datetime("publicatedAt");
     table.boolean("isPublish");
-    //relation
+    // relation
     table.integer("authorId").notNullable();
     table.foreign("authorId").references("id").inTable("users");
   });
@@ -26,7 +26,7 @@ export const up = async (knex) => {
     table.increments("id");
     table.text("content").notNullable();
     table.datetime("writedAt").notNullable();
-    //relation
+    // relation
     table.integer("authorId").notNullable();
     table.integer("postId").notNullable();
     table.foreign("authorId").references("id").inTable("users");

@@ -1,4 +1,4 @@
-//Todo
+// Todo
 
 export const hasBasicAuthority = () => {};
 

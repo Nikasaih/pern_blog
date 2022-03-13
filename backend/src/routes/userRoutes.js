@@ -1,12 +1,18 @@
 import { ValidationError } from "yup";
+import { jwtAuthMidleware } from "../midlewares/jwtAuthMidleware.js";
+import { UserModel } from "../models/modelsClass/userModel.js";
 import {
   registerSchema,
   signInSchema,
 } from "../models/modelsSchema/userModelSchema.js";
-import { register } from "../services/registrationServices.js";
-import { signIn } from "../services/signInServices.js";
 
-const baseRoute = "/users";
+const errorManager = (res, error) => {
+  if (error instanceof ValidationError) {
+    res.status(400).send(error);
+    return;
+  }
+  res.status(500);
+};
 
 const userRoutes = ({ app }) => {
   app.post("/register", async (req, res) => {
@@ -14,15 +20,11 @@ const userRoutes = ({ app }) => {
 
     try {
       const registrationData = registerSchema.validateSync(body);
-      //Todo send email for validation
-      await register(registrationData);
+      // Todo send email for validation
+      await UserModel.registerUser(registrationData);
       res.status(201).send("look at your mail");
-    } catch (e) {
-      if (e instanceof ValidationError) {
-        res.status(400).send(e);
-        return;
-      }
-      res.status(500);
+    } catch (err) {
+      errorManager(res, err);
     }
   });
 
@@ -31,37 +33,31 @@ const userRoutes = ({ app }) => {
 
     try {
       const credentialSubmited = signInSchema.validateSync(body);
-      const jwt = await signIn(credentialSubmited);
+      const jwt = await UserModel.signIn(credentialSubmited);
       res.send(jwt);
-      //validateConnection
-      //generateToken
-    } catch (e) {
-      if (e instanceof ValidationError) {
-        res.status(400).send(e);
-      }
-      console.log(e);
-      res.status(500).send("");
+    } catch (err) {
+      errorManager(res, err);
     }
   });
 
-  app.delete("/delete-my-account/:userEmail", (req, res) => {
-    //check has authority
-    //deleteAccount
+  app.delete("/delete-my-account", jwtAuthMidleware, (req, res) => {
+    // check has authority
+    // deleteAccount
   });
 
   app.post("/suspend-user/:userId", (req, res) => {
-    //check has admin authority
-    //suspendAccount
+    // check has admin authority
+    // suspendAccount
   });
 
   app.post("/unsuspend-user/:userId", (req, res) => {
-    //chekc has admin authority
-    //unsuspendAccount
+    // chekc has admin authority
+    // unsuspendAccount
   });
 
   app.post("/ban-user/:userId", (req, res) => {
-    //chek has admin authority
-    //banUser
+    // chek has admin authority
+    // banUser
   });
 };
 
