@@ -1,6 +1,10 @@
 import { ValidationError } from "yup";
-import { registerSchema } from "../models/modelsSchema/userModelSchema.js";
+import {
+  registerSchema,
+  signInSchema,
+} from "../models/modelsSchema/userModelSchema.js";
 import { register } from "../services/registrationServices.js";
+import { signIn } from "../services/signInServices.js";
 
 const baseRoute = "/users";
 
@@ -18,13 +22,26 @@ const userRoutes = ({ app }) => {
         res.status(400).send(e);
         return;
       }
-      res.status(500).send("some error appen");
+      res.status(500);
     }
   });
 
-  app.post("/sign-in", (req, res) => {
-    //validateConnection
-    //generateToken
+  app.post("/sign-in", async (req, res) => {
+    const { body } = req;
+
+    try {
+      const credentialSubmited = signInSchema.validateSync(body);
+      const jwt = await signIn(credentialSubmited);
+      res.send(jwt);
+      //validateConnection
+      //generateToken
+    } catch (e) {
+      if (e instanceof ValidationError) {
+        res.status(400).send(e);
+      }
+      console.log(e);
+      res.status(500).send("");
+    }
   });
 
   app.delete("/delete-my-account/:userEmail", (req, res) => {

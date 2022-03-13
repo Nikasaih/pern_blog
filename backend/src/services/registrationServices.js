@@ -4,7 +4,6 @@ import { UserRole } from "../utils/userRoleEnum.js";
 import { hashPassword } from "./pwHashServices.js";
 
 export const register = async ({ email, displayName, password }) => {
-  //hash password
   if (await UserModel.findByEmail(email)) {
     throw EmailUnavailableExc();
   }

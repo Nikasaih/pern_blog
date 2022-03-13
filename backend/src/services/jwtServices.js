@@ -1,9 +1,10 @@
 import jsonwebtoken from "jsonwebtoken";
+import config from "../config.js";
 
-export const generateJwt = (userId) => {
+export const generateJwt = (user) => {
   return jsonwebtoken.sign(
-    { payload: { userId } },
-    config.security.session.secret,
+    { payload: { user } },
+    config.security.session.jwtSecret,
     { expiresIn: config.security.session.expiresIn }
   );
 };
@@ -11,7 +12,7 @@ export const generateJwt = (userId) => {
 export const validateJwt = (authentication) => {
   const { payload } = jsonwebtoken.verify(
     authentication,
-    config.security.session.secret
+    config.security.session.jwtSecret
   );
 
   return payload;

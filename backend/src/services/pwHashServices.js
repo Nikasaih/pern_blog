@@ -20,11 +20,6 @@ export const hashPassword = (
   return [passwordHashed, salt];
 };
 
-export const validatePassword = async (userEmail, passwordSubmit) => {
-  const user = await UserModel.findByEmail(userEmail);
-  if (!user) {
-    return false;
-  }
-
+export const validatePassword = async (user, passwordSubmit) => {
   return user.passwordHash === hashPassword(passwordSubmit, user.passwordSalt);
 };
