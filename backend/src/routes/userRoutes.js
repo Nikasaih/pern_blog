@@ -5,6 +5,10 @@ import {
   registerSchema,
   signInSchema,
 } from "../models/modelsSchema/userModelSchema.js";
+import {
+  hasAdminAuthority,
+  hasBasicAuthority,
+} from "../services/hasAuthority.js";
 
 const errorManager = (res, error) => {
   if (error instanceof ValidationError) {
@@ -41,23 +45,43 @@ const userRoutes = ({ app }) => {
   });
 
   app.delete("/delete-my-account", jwtAuthMidleware, (req, res) => {
-    // check has authority
-    // deleteAccount
+    const { auth } = req;
+    if (hasBasicAuthority(auth.role)) {
+      // deleteAccount
+      res.status(202).send("It's sad to see you go away");
+    }
+
+    res.status(403).send("you're not allow to delete other account");
   });
 
-  app.post("/suspend-user/:userId", (req, res) => {
-    // check has admin authority
-    // suspendAccount
+  app.post("/suspend-user/:userId", jwtAuthMidleware, (req, res) => {
+    const { auth } = req;
+    if (hasAdminAuthority(auth.role)) {
+      // suspendAccount
+      res.status(202).send("user has been suspend");
+    }
+
+    res.status(403).send("you're not allow to suspend a user");
   });
 
-  app.post("/unsuspend-user/:userId", (req, res) => {
-    // chekc has admin authority
-    // unsuspendAccount
+  app.post("/unsuspend-user/:userId", jwtAuthMidleware, (req, res) => {
+    const { auth } = req;
+    if (hasAdminAuthority(auth.role)) {
+      // suspendAccount
+      res.status(202).send("user has been unsuspend");
+    }
+
+    res.status(403).send("you're not allow to unsuspend a user");
   });
 
-  app.post("/ban-user/:userId", (req, res) => {
-    // chek has admin authority
-    // banUser
+  app.post("/ban-user/:userId", jwtAuthMidleware, (req, res) => {
+    const { auth } = req;
+    if (hasAdminAuthority(auth.role)) {
+      // banAccount
+      res.status(202).send("user has been ban");
+    }
+
+    res.status(403).send("you're not allow to ban a user");
   });
 };
 

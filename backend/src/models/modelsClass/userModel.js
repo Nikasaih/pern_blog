@@ -23,17 +23,9 @@ export class UserModel extends Model {
     return UserModel.query().findOne({ email });
   }
 
-  static async getUserIfExist(userEmail) {
-    const user = await UserModel.findByEmail(userEmail);
-    if (user) {
-      return [true, user];
-    }
-    return [false];
-  }
-
   static async signIn({ email, password }) {
-    const [exist, user] = await UserModel.getUserIfExist(email);
-    if (!exist) {
+    const user = await UserModel.findByEmail(email);
+    if (!user) {
       throw UserNotFoundExc();
     }
     if (!validatePassword(user, password)) {
