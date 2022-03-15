@@ -1,7 +1,5 @@
-import { randomBytes } from "crypto";
-import { pbkdf2Sync } from "crypto";
+import { pbkdf2Sync, randomBytes } from "crypto";
 import config from "../config.js";
-import { UserModel } from "../models/modelsclass/usermodel.js";
 
 const { iterationNumber, characterNumber, digestAlgo, pepper } =
   config.security.password;
@@ -12,7 +10,7 @@ export const hashPassword = (
 ) => {
   const passwordHashed = pbkdf2Sync(
     rawPassword,
-    salt,
+    salt + pepper,
     iterationNumber,
     characterNumber,
     digestAlgo
