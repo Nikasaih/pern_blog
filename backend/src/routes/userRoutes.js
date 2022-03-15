@@ -8,7 +8,7 @@ import {
 import {
   hasAdminAuthority,
   hasBasicAuthority,
-} from "../services/hasAuthority.js";
+} from "../services/hasAuthorityServices.js";
 
 const errorManager = (res, error) => {
   if (error instanceof ValidationError) {
