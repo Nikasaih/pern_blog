@@ -47,7 +47,7 @@ const userRoutes = ({ app }) => {
   app.delete("/delete-my-account", jwtAuthMidleware, (req, res) => {
     const { auth } = req;
     if (hasBasicAuthority(auth.role)) {
-      // deleteAccount
+      UserModel.deleteAccount(id);
       res.status(202).send("It's sad to see you go away");
     }
 
@@ -55,9 +55,13 @@ const userRoutes = ({ app }) => {
   });
 
   app.post("/suspend-user/:userId", jwtAuthMidleware, (req, res) => {
-    const { auth } = req;
+    const {
+      auth,
+      params: { userId },
+    } = req;
+
     if (hasAdminAuthority(auth.role)) {
-      // suspendAccount
+      UserModel.suspendAccount(userId, 10);
       res.status(202).send("user has been suspend");
     }
 
@@ -65,9 +69,13 @@ const userRoutes = ({ app }) => {
   });
 
   app.post("/unsuspend-user/:userId", jwtAuthMidleware, (req, res) => {
-    const { auth } = req;
+    const {
+      auth,
+      params: { userId },
+    } = req;
+
     if (hasAdminAuthority(auth.role)) {
-      // suspendAccount
+      UserModel.unSuspendAccount(userId);
       res.status(202).send("user has been unsuspend");
     }
 
@@ -75,9 +83,13 @@ const userRoutes = ({ app }) => {
   });
 
   app.post("/ban-user/:userId", jwtAuthMidleware, (req, res) => {
-    const { auth } = req;
+    const {
+      auth,
+      params: { userId },
+    } = req;
+
     if (hasAdminAuthority(auth.role)) {
-      // banAccount
+      UserModel.banAccount(userId);
       res.status(202).send("user has been ban");
     }
 
