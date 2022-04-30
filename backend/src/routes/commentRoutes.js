@@ -1,33 +1,47 @@
 import { createCommentSchema } from "../models/modelsSchema/commentModelSchema.js";
+import { CommentModel } from "../models/modelsClass/commentModel.js";
+import { currentDateTime } from "../utils/dateUtils.js";
 
 const commentRoutes = ({ app }) => {
-  app.get("/comments", (req, res) => {
-    res.send(CommentModel.getAll());
+  app.get("/comments", async (req, res) => {
+    res.send(await CommentModel.getAll());
   });
 
-  app.get("/comments/:commentId", (req, res) => {
+  app.get("/comments/:commentId", async (req, res) => {
     const {
       params: { commentId },
     } = req;
-    res.send(CommentModel.getById(commentId));
+    const comment = await CommentModel.deleteOneById(commentId);
+    if (!comment) {
+      res.status(404).send(`post with id : ${commentId} not found`);
+      return;
+    }
+    res.send(comment);
   });
 
-  app.comment("/comments", (req, res) => {
+  app.post("/comments", async (req, res) => {
     const { body } = req;
+
     if (!createCommentSchema.validate(body)) {
       res.status(403);
       return;
     }
-    const created = CommentModel.createOne(body);
+
+    const newComment = { ...body, writedAt: currentDateTime() };
+    const created = await CommentModel.createOne(newComment);
     res.status(201).send(created);
   });
 
-  app.delete("/comments/:commentId", (req, res) => {
+  app.delete("/comments/:commentId", async (req, res) => {
     const {
       params: { commentId },
     } = req;
 
-    CommentModel.deleteOneById(commentId);
+    const comment = await CommentModel.deleteOneById(commentId);
+    if (!comment) {
+      res.status(404).send(`comment with id : ${commentId} not found`);
+      return;
+    }
     res.send(`comment with Id ${commentId} deleted`);
   });
 };
