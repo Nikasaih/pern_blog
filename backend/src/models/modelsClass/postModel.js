@@ -1,4 +1,5 @@
 import { Model } from "objection";
+import { currentDateTime } from "../../utils/dateUtils.js";
 
 export class PostModel extends Model {
   static get tableName() {
@@ -19,5 +20,13 @@ export class PostModel extends Model {
 
   static async deleteOneById(id) {
     return PostModel.query().deleteById(id);
+  }
+
+  static async publishById(id) {
+    const post = await PostModel.query().findById(id);
+    return PostModel.query().updateAndFetchById(id, {
+      ...post,
+      publicatedAt: currentDateTime(),
+    });
   }
 }

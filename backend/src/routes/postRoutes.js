@@ -28,6 +28,10 @@ const postRoutes = ({ app }) => {
     }
 
     const created = await PostModel.createOne(body);
+    if (body.isPublish === true) {
+      res.status(401).send(await PostModel.publishById(created.id));
+      return;
+    }
     res.status(201).send(created);
   });
 

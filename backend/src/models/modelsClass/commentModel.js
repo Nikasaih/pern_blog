@@ -1,4 +1,5 @@
 import { Model } from "objection";
+import { currentDateTime } from "../../utils/dateUtils.js";
 
 export class CommentModel extends Model {
   static get tableName() {
@@ -13,7 +14,8 @@ export class CommentModel extends Model {
   }
 
   static async createOne(data) {
-    return CommentModel.query().insert(data);
+    const newComment = { ...data, writedAt: currentDateTime() };
+    return CommentModel.query().insert(newComment);
   }
 
   static async deleteOneById(id) {

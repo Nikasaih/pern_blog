@@ -1,6 +1,5 @@
 import { createCommentSchema } from "../models/modelsSchema/commentModelSchema.js";
 import { CommentModel } from "../models/modelsClass/commentModel.js";
-import { currentDateTime } from "../utils/dateUtils.js";
 
 const commentRoutes = ({ app }) => {
   app.get("/comments", async (req, res) => {
@@ -27,7 +26,6 @@ const commentRoutes = ({ app }) => {
       return;
     }
 
-    const newComment = { ...body, writedAt: currentDateTime() };
     const created = await CommentModel.createOne(newComment);
     res.status(201).send(created);
   });
