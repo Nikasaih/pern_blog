@@ -12,30 +12,28 @@ const hasAdminRole = (role) => {
   return role === UserRole.ADMIN;
 };
 
-export const hasBasicAuthority = (user) => {
-  const { role } = user;
-
-  if (hasBasicRole(role) || hasAuthorRole(role) || hasAdminRole(role)) {
+export const hasBasicAuthority = (userRole) => {
+  if (
+    hasBasicRole(userRole) ||
+    hasAuthorRole(userRole) ||
+    hasAdminRole(userRole)
+  ) {
     return true;
   }
 
   return false;
 };
 
-export const hasAuthorAuthority = (user) => {
-  const { role } = user;
-
-  if (hasAuthorRole(role) || hasAdminRole(role)) {
+export const hasAuthorAuthority = (userRole) => {
+  if (hasAuthorRole(userRole) || hasAdminRole(userRole)) {
     return true;
   }
 
   return false;
 };
 
-export const hasAdminAuthority = (user) => {
-  const { role } = user;
-
-  if (hasAdminRole(role)) {
+export const hasAdminAuthority = (userRole) => {
+  if (hasAdminRole(userRole)) {
     return true;
   }
 

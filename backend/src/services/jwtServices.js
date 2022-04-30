@@ -2,9 +2,9 @@ import jsonwebtoken from "jsonwebtoken";
 import config from "../config.js";
 
 export const generateJwt = (user) => {
-  const { displayName, role } = user;
+  const { displayName, role, id } = user;
   return jsonwebtoken.sign(
-    { payload: { displayName, role } },
+    { payload: { displayName, role, id } },
     config.security.session.jwtSecret,
     { expiresIn: config.security.session.expiresIn }
   );

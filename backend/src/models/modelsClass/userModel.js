@@ -19,26 +19,26 @@ export class UserModel extends Model {
     return "users";
   }
 
-  static findByEmail(email) {
+  static async findByEmail(email) {
     return UserModel.query().findOne({ email });
   }
 
   static async signIn({ email, password }) {
     const user = await UserModel.findByEmail(email);
     if (!user) {
-      throw UserNotFoundExc();
+      return { badCredential: "bad credential" };
     }
     if (!validatePassword(user, password)) {
-      throw CredentialNotMatchExc();
+      return { badCredential: "bad credential" };
     }
 
-    return generateJwt(user);
+    return { jwt: generateJwt(user) };
   }
 
   static async registerUser({ email, displayName, password }) {
-    const [user] = await UserModel.getUserIfExist(email);
+    const user = await UserModel.findByEmail(email);
     if (user) {
-      throw EmailUnavailableExc();
+      return;
     }
     const [passwordHash, passwordSalt] = hashPassword(password);
     const userToStore = {

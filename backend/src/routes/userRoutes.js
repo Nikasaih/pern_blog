@@ -10,47 +10,43 @@ import {
   hasBasicAuthority,
 } from "../services/hasAuthorityServices.js";
 
-const errorManager = (res, error) => {
-  if (error instanceof ValidationError) {
-    res.status(400).send(error);
-    return;
-  }
-  res.status(500);
-};
-
 const userRoutes = ({ app }) => {
+  //Todo Delete debug
+  app.get("/users", async (req, res) => {
+    res.send(await UserModel.query());
+  });
   app.post("/register", async (req, res) => {
     const { body } = req;
-
-    try {
-      const registrationData = registerSchema.validateSync(body);
-      // Todo send email for validation
-      await UserModel.registerUser(registrationData);
-      res.status(201).send("look at your mail");
-    } catch (err) {
-      errorManager(res, err);
+    // Todo send email for validation
+    if (!registerSchema.validateSync(body)) {
+      res.status(400).send("you have not send valid request");
+      return;
     }
+    await UserModel.registerUser(body);
+    res.status(201).send("registration complete");
   });
 
   app.post("/sign-in", async (req, res) => {
     const { body } = req;
-
-    try {
-      const credentialSubmited = signInSchema.validateSync(body);
-      const jwt = await UserModel.signIn(credentialSubmited);
-      res.send(jwt);
-    } catch (err) {
-      errorManager(res, err);
+    if (!signInSchema.validateSync(body)) {
+      res.status(400).send("you have not send valid request");
+      return;
     }
+
+    const response = await UserModel.signIn(body);
+    if (response.badCredential) {
+      res.status(400).send("Unable to sign-in, look at your credentials");
+    }
+    res.send(response.jwt);
   });
 
-  app.delete("/delete-my-account", jwtAuthMidleware, (req, res) => {
+  app.delete("/delete-my-account", jwtAuthMidleware, async (req, res) => {
     const { auth } = req;
     if (hasBasicAuthority(auth.role)) {
-      UserModel.deleteAccount(id);
+      await UserModel.deleteAccount(auth.id);
       res.status(202).send("It's sad to see you go away");
+      return;
     }
-
     res.status(403).send("you're not allow to delete other account");
   });
 
@@ -62,7 +58,7 @@ const userRoutes = ({ app }) => {
 
     if (hasAdminAuthority(auth.role)) {
       UserModel.suspendAccount(userId, 10);
-      res.status(202).send("user has been suspend");
+      res.status(202).send(`user with id : ${id} has been suspend`);
     }
 
     res.status(403).send("you're not allow to suspend a user");
@@ -76,7 +72,7 @@ const userRoutes = ({ app }) => {
 
     if (hasAdminAuthority(auth.role)) {
       UserModel.unSuspendAccount(userId);
-      res.status(202).send("user has been unsuspend");
+      res.status(202).send(`user with id : ${id} has been unsuspend`);
     }
 
     res.status(403).send("you're not allow to unsuspend a user");
@@ -90,7 +86,7 @@ const userRoutes = ({ app }) => {
 
     if (hasAdminAuthority(auth.role)) {
       UserModel.banAccount(userId);
-      res.status(202).send("user has been ban");
+      res.status(202).send(`user with id : ${id} has been ban`);
     }
 
     res.status(403).send("you're not allow to ban a user");
