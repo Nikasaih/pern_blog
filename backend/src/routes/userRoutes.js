@@ -1,4 +1,3 @@
-import { ValidationError } from "yup";
 import { jwtAuthMidleware } from "../midlewares/jwtAuthMidleware.js";
 import { UserModel } from "../models/modelsClass/userModel.js";
 import {
@@ -15,9 +14,10 @@ const userRoutes = ({ app }) => {
   app.get("/users", async (req, res) => {
     res.send(await UserModel.query());
   });
+
   app.post("/register", async (req, res) => {
     const { body } = req;
-    // Todo send email for validation
+
     if (!registerSchema.validateSync(body)) {
       res.status(400).send("you have not send valid request");
       return;

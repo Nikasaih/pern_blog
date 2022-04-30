@@ -4,9 +4,6 @@ import {
   hashPassword,
   validatePassword,
 } from "../../services/pwHashServices.js";
-import { CredentialNotMatchExc } from "../../utils/exception/CredentialNotMatchExc.js";
-import { EmailUnavailableExc } from "../../utils/exception/EmailUnavailableExc.js";
-import { UserNotFoundExc } from "../../utils/exception/UserNotFoundExc.js";
 import { UserRole } from "../../utils/userRoleEnum.js";
 const defaultRegistration = {
   role: UserRole.BASIC,
