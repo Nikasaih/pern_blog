@@ -46,6 +46,7 @@ export const getAllUserRequest = () => {
 export const logoutRequest = () => {
   localStorage.setItem("jwt", null);
 };
+
 const getAuthHeader = () => {
   const auth = localStorage.getItem("jwt");
   if (!auth) {

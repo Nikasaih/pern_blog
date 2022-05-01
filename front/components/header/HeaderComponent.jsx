@@ -8,7 +8,11 @@ export const HeaderComponent = () => {
   return (
     <header>
       <Link href="/">
-        <a>Tous les Posts</a>
+        <a>||Tous les Posts ||</a>
+      </Link>
+
+      <Link href="/admin/manage-user">
+        <a>|| admin debug ||</a>
       </Link>
 
       {!authData && <HeaderUnLoggedComponent />}

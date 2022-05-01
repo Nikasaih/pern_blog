@@ -1,6 +1,13 @@
+import { useContext, useEffect, useState } from "react";
 import { getAllUserRequest } from "../../api/requests/userRequest.js";
+import { UserRole } from "../../api/utils/userRoleEnum.js";
+import { hasAdminAuthority } from "../../api/utils/utils.js";
 import { ManageUserComponent } from "../../components/admin/ManageUserComponent.jsx";
+import { AppContext } from "../../components/AppContext.jsx";
+
 const ManageUser = () => {
+  const { authData } = useContext(AppContext);
+
   const [users, setUsers] = useState();
 
   const loadUsers = async () => {
@@ -9,8 +16,14 @@ const ManageUser = () => {
   };
 
   useEffect(() => {
+    if (typeof authData === undefined) {
+      return;
+    }
+    if (!hasAdminAuthority(authData)) {
+      return;
+    }
     loadUsers();
-  }, []);
+  }, [authData]);
 
   return (
     <div>

@@ -11,8 +11,11 @@ import {
 
 const userRoutes = ({ app }) => {
   app.get("/users", jwtAuthMidleware, async (req, res) => {
-    if (!hasAdminAuthority(auth.role)) {
+    const { auth } = req;
+
+    if (!auth || !hasAdminAuthority(auth.role)) {
       res.status(401).send();
+      return;
     }
 
     res.send(await UserModel.getAllUser());
