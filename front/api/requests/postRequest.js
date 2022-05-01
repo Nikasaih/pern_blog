@@ -1,5 +1,9 @@
 import axios from "axios";
-import { getAllPostRoute, getOnePostByIdRoute } from "../routes/postRoutes.js";
+import {
+  deleteOnePostByIdRoute,
+  getAllPostRoute,
+  getOnePostByIdRoute,
+} from "../routes/postRoutes.js";
 
 export const getAllPostRequest = () => {
   return axios.get(getAllPostRoute);
@@ -7,4 +11,8 @@ export const getAllPostRequest = () => {
 
 export const getPostByIdRequest = (id) => {
   return axios.get(getOnePostByIdRoute(id));
+};
+
+export const deletePostByIdRequest = (id) => {
+  return axios.delete(deleteOnePostByIdRoute(id));
 };

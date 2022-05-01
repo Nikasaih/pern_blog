@@ -26,9 +26,13 @@ export const Register = () => {
             noValidate
             className="flex flex-col gap-4 p-4"
           >
-            <Field type="email" name="email" placeholder="Email" />
-            <Field name="password" />
-            <Field name="displayName" />
+            <Field type="email" name="email" placeholder="Enter your email" />
+            <Field
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+            />
+            <Field name="displayName" placeholder="Enter your pseudo" />
             <button disabled={!isValid || isSubmitting} type="submit">
               Sign-in
             </button>

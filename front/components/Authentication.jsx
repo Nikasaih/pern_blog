@@ -3,7 +3,10 @@ import { Field, Form, Formik, FormikProps } from "formik";
 const initialValues = { password: "", email: "" };
 
 export const Authentication = () => {
-  const handleAuthenticationSubmit = ({ password, email }, { resetForm }) => {
+  const handleAuthenticationSubmit = async (
+    { password, email },
+    { resetForm }
+  ) => {
     await signInRequest({ password, email });
     resetForm();
   };
@@ -21,9 +24,15 @@ export const Authentication = () => {
             noValidate
             className="flex flex-col gap-4 p-4"
           >
-            <Field type="email" name="email" placeholder="Email" />
-            <Field name="password" />
-            <button disabled={!isValid || isSubmitting} type="submit">Sign-in</button>
+            <Field type="email" name="email" placeholder="Enter your email" />
+            <Field
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+            />
+            <button disabled={!isValid || isSubmitting} type="submit">
+              Sign-in
+            </button>
           </form>
         );
       }}
