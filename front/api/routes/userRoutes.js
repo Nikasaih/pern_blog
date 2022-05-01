@@ -3,6 +3,7 @@ import { rootRoute } from "./rootRoute.js";
 export const registerRoute = rootRoute + "/register";
 export const signInRoute = rootRoute + "/sign-in";
 export const deleteMyAccountRoute = rootRoute + "/delete-my-account";
+export const getAllUserRoute = rootRoute + "/users";
 
 export const suspendUserByIdRoute = (id) => {
   return `${rootRoute}/suspend-user/${id}`;

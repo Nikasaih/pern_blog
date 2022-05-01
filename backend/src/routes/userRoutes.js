@@ -10,7 +10,11 @@ import {
 } from "../services/hasAuthorityServices.js";
 
 const userRoutes = ({ app }) => {
-  app.get("/users", async (req, res) => {
+  app.get("/users", jwtAuthMidleware, async (req, res) => {
+    if (!hasAdminAuthority(auth.role)) {
+      res.status(401).send();
+    }
+
     res.send(await UserModel.getAllUser());
   });
 

@@ -5,6 +5,7 @@ import {
   suspendUserByIdRoute,
   unSuspendUserByIdRoute,
   banUserByIdRoute,
+  getAllUserRoute,
 } from "../routes/userRoutes.js";
 import axios from "axios";
 
@@ -22,18 +23,23 @@ export const deleteMyAccountRequest = () => {
 };
 
 export const suspendUserRequest = (id) => {
-  const headers = getAuthHeader();
+  const headers = { headers: { ...getAuthHeader() } };
   return axios.post(suspendUserByIdRoute(id), {}, headers);
 };
 
 export const unSuspendUserRequest = (id) => {
-  const headers = getAuthHeader();
+  const headers = { headers: { ...getAuthHeader() } };
   return axios.post(unSuspendUserByIdRoute(id), {}, headers);
 };
 
 export const banUserRequest = (id) => {
-  const headers = getAuthHeader();
+  const headers = { headers: { ...getAuthHeader() } };
   return axios.post(banUserByIdRoute(id), {}, headers);
+};
+
+export const getAllUserRequest = () => {
+  const headers = { headers: { ...getAuthHeader() } };
+  return axios.get(getAllUserRoute, {}, headers);
 };
 
 export const logoutRequest = () => {
