@@ -1,4 +1,3 @@
-// Todo with yup
 import * as yup from "yup";
 
 export const createCommentSchema = yup.object().shape({

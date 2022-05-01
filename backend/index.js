@@ -1,5 +1,6 @@
 import express, { json } from "express";
 import knex from "knex";
+import cors from "cors";
 import { Model } from "objection";
 import knexfile from "./knexfile.js";
 import config from "./src/config.js";
@@ -12,6 +13,11 @@ const db = knex(knexfile);
 Model.knex(db);
 
 app.use(json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 userRoutes({ app });
 postRoutes({ app });
 commentRoutes({ app });

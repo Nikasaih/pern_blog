@@ -10,11 +10,6 @@ import {
 } from "../services/hasAuthorityServices.js";
 
 const userRoutes = ({ app }) => {
-  //Todo Delete debug
-  app.get("/users", async (req, res) => {
-    res.send(await UserModel.query());
-  });
-
   app.post("/register", async (req, res) => {
     const { body } = req;
 

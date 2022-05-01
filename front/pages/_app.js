@@ -1,6 +1,5 @@
-import { Header } from "../components/Header.jsx";
 import "../styles/globals.css";
-
+import { Header } from "./../components/Header.jsx";
 function MyApp({ Component, pageProps }) {
   return (
     <div>

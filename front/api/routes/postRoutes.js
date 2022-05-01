@@ -1,4 +1,4 @@
-export const rootPostRoute = "/Posts";
+export const rootPostRoute = "/posts";
 export const postNewPost = rootPostRoute;
 export const getAllPost = rootPostRoute;
 
