@@ -2,9 +2,13 @@ import { Post } from "../../components/Post.jsx";
 import React, { useState, useEffect } from "react";
 
 import { rootRoute } from "../../api/routes/rootRoute.js";
-import { getAllPost, getOnePostById } from "../../api/routes/postRoutes.js";
+import {
+  getAllPost,
+  getOnePostByIdRoute,
+} from "../../api/routes/postRoutes.js";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { getPostByIdRequest } from "../../api/requests/postRequest.js";
 
 const PostDetails = () => {
   const router = useRouter();
@@ -13,11 +17,9 @@ const PostDetails = () => {
   const [fetchError, setFetchError] = useState();
   const loadPosts = async () => {
     try {
-      const fullRoute = rootRoute + getOnePostById(id);
-      const response = await axios.get(fullRoute);
+      const response = await getPostByIdRequest(id);
       setPost(response.data);
     } catch (err) {
-      console.table(err);
       setFetchError(err);
     }
   };

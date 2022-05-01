@@ -1,17 +1,13 @@
 import styles from "../styles/Home.module.css";
 import React, { useState, useEffect } from "react";
-import { rootRoute } from "../api/routes/rootRoute.js";
-import { getAllPost } from "../api/routes/postRoutes.js";
-import axios from "axios";
 import { Post } from "../components/Post.jsx";
-
-const fullRoute = rootRoute + getAllPost;
+import { getAllPostRequest } from "../api/requests/postRequest.js";
 
 const Index = () => {
   const [posts, setPosts] = useState();
 
   const loadPosts = async () => {
-    const response = await axios.get(fullRoute);
+    const response = await getAllPostRequest();
     setPosts(response.data);
   };
 

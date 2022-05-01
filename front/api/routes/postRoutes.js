@@ -1,10 +1,12 @@
-export const rootPostRoute = "/posts";
-export const postNewPost = rootPostRoute;
-export const getAllPost = rootPostRoute;
+import { rootRoute } from "./rootRoute.js";
 
-export const getOnePostById = (id) => {
-  return `${getAllPost}/${id}`;
+export const rootPostRoute = rootRoute + "/posts";
+export const postNewPostRoute = rootPostRoute;
+export const getAllPostRoute = rootPostRoute;
+
+export const getOnePostByIdRoute = (id) => {
+  return `${getAllPostRoute}/${id}`;
 };
-export const deleteOnePostById = (id) => {
-  return `${getAllPost}/${id}`;
+export const deleteOnePostByIdRoute = (id) => {
+  return `${getAllPostRoute}/${id}`;
 };

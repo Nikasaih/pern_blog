@@ -23,7 +23,7 @@ export const Authentication = () => {
           >
             <Field type="email" name="email" placeholder="Email" />
             <Field name="password" />
-            <button disabled={!isValid || isSubmitting}>Sign-in</button>
+            <button disabled={!isValid || isSubmitting} type="submit">Sign-in</button>
           </form>
         );
       }}

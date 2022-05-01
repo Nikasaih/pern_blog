@@ -1,14 +1,13 @@
 import { signInSchema } from "../api/routesBodySchema/userModelSchema.js";
-import { Field, Formik} from "formik";
+import { Field, Formik } from "formik";
 import { registerRequest, signInRequest } from "../api/requests/userRequest.js";
 const initialValues = { password: "", email: "", displayName: "" };
 
-export const Register = async () => {
-  const handleAuthenticationSubmit = (
+export const Register = () => {
+  const handleAuthenticationSubmit = async (
     { password, email, displayName },
     { resetForm }
   ) => {
-
     await registerRequest({ password, email, displayName });
     await signInRequest({ password, email });
     resetForm();
@@ -30,7 +29,9 @@ export const Register = async () => {
             <Field type="email" name="email" placeholder="Email" />
             <Field name="password" />
             <Field name="displayName" />
-            <button disabled={!isValid || isSubmitting}>Sign-in</button>
+            <button disabled={!isValid || isSubmitting} type="submit">
+              Sign-in
+            </button>
           </form>
         );
       }}
