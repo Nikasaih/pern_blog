@@ -38,7 +38,7 @@ const PostDetails = () => {
             publicatedAt={post.publicatedAt}
             authorId={post.authorId}
           />
-          <button>Delete</button>
+          {authorId === auth.id && <button>Delete</button>}
         </>
       )}
     </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const HeaderLoggedComponent = () => {
-  const { auth, setAuth } = useContext(AppContext);
+  const { setAuth } = useContext(AppContext);
 
   const handleLogout = () => {
     logoutRequest();

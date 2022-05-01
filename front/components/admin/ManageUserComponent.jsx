@@ -2,7 +2,6 @@ import {
   banUserRequest,
   unSuspendUserRequest,
 } from "../../api/requests/userRequest.js";
-import { getAllUserRoute } from "../../api/routes/userRoutes.js";
 
 const ManageUserComponent = ({
   id,
