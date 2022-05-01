@@ -2,7 +2,7 @@ import { signInSchema } from "../api/routesBodySchema/userModelSchema.js";
 import { Field, Formik } from "formik";
 import { createNewPostRequest } from "../../api/requests/postRequest.js";
 
-const initialValues = { password: "", email: "" };
+const initialValues = { title: "", content: "", isPublish: false };
 
 export const CreatePostComponent = () => {
   const handleAuthenticationSubmit = async (
@@ -26,8 +26,13 @@ export const CreatePostComponent = () => {
             noValidate
             className="flex flex-col gap-4 p-4"
           >
-            <Field type="email" name="email" placeholder="Enter your email" />
-            <Field name="password" placeholder="Enter your password" />
+            <Field name="title" placeholder="Enter your email" />
+            <Field name="content" placeholder="Enter your email" />
+            <Field
+              name="isPublish"
+              type="checkbox"
+              placeholder="Enter your password"
+            />
 
             <button disabled={!isValid || isSubmitting} type="submit">
               Sign-in

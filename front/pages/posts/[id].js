@@ -1,16 +1,12 @@
-import { Post } from "../../components/Post.jsx";
-import React, { useState, useEffect } from "react";
-
-import { rootRoute } from "../../api/routes/rootRoute.js";
-import {
-  getAllPost,
-  getOnePostByIdRoute,
-} from "../../api/routes/postRoutes.js";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import { getPostByIdRequest } from "../../api/requests/postRequest.js";
+import AppContext from "../../components/AppContext.jsx";
+import { DisplayPostComponent } from "../../components/post/DisplayPostComponent.jsx";
 
 const PostDetails = () => {
+  const { auth } = useContext(AppContext);
+
   const router = useRouter();
   const { id } = router.query;
   const [post, setPost] = useState();
@@ -34,13 +30,16 @@ const PostDetails = () => {
         <h2>Post not found</h2>
       )}
       {post && (
-        <Post
-          key={id}
-          title={post.title}
-          content={post.content}
-          publicatedAt={post.publicatedAt}
-          authorId={post.authorId}
-        />
+        <>
+          <DisplayPostComponent
+            key={id}
+            title={post.title}
+            content={post.content}
+            publicatedAt={post.publicatedAt}
+            authorId={post.authorId}
+          />
+          <button>Delete</button>
+        </>
       )}
     </div>
   );

@@ -1,7 +1,8 @@
 import styles from "../styles/Home.module.css";
 import React, { useState, useEffect } from "react";
-import { DisplayPost } from "../components/post/DisplayPost.jsx";
+import { DisplayPostComponent } from "../components/post/DisplayPostComponent.jsx";
 import { getAllPostRequest } from "../api/requests/postRequest.js";
+import Link from "next/link";
 
 const Index = () => {
   const [posts, setPosts] = useState();
@@ -20,13 +21,19 @@ const Index = () => {
       <p>Index</p>
       {posts &&
         posts.map((e, index) => (
-          <DisplayPost
-            key={index}
-            title={e.title}
-            content={e.content}
-            publicatedAt={e.publicatedAt}
-            authorId={e.authorId}
-          />
+          <div>
+            {" "}
+            <DisplayPostComponent
+              key={index}
+              title={e.title}
+              content={e.content}
+              publicatedAt={e.publicatedAt}
+              authorId={e.authorId}
+            />
+            <Link href={`/posts/${e.id}`}>
+              <a>Voir plus</a>
+            </Link>
+          </div>
         ))}
     </div>
   );

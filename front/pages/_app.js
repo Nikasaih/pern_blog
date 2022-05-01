@@ -1,14 +1,13 @@
 import { AppContextProvider } from "../components/AppContext.jsx";
 import "../styles/globals.css";
-import { Header } from "./../components/header/Header.jsx";
+import { HeaderComponent } from "../components/header/HeaderComponent.jsx";
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <AppContextProvider>
-        <Header />
+        <HeaderComponent />
         <Component {...pageProps} />
       </AppContextProvider>
-      x
     </>
   );
 }

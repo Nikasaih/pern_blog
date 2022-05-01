@@ -1,13 +1,23 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { getCurrentAuth, parseJwt } from "../api/utils/utils.js";
 
 const AppContext = createContext({});
 
 export const AppContextProvider = (props) => {
-  const [auth, setAuth] = useState();
+  const [authData, setAuthData] = useState();
+
+  const getLog = (current) => {
+    setAuthData(parseJwt(current));
+  };
+
+  const logout = () => {
+    setAuthData(null);
+  };
+
   useEffect(() => {
-    setAuth(getCurrentAuth());
+    getLog(getCurrentAuth());
   }, []);
-  return <AppContext.Provider {...props} value={{ auth, setAuth }} />;
+  return <AppContext.Provider {...props} value={{ authData, logout }} />;
 };
 
 export default AppContext;
