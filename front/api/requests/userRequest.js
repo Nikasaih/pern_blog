@@ -36,6 +36,10 @@ export const banUserRequest = (id) => {
   return axios.post(banUserByIdRoute(id), {}, headers);
 };
 
+export const logoutRequest = () => {
+  localStorage.setItem("jwt", null);
+  console.log("gtoitj");
+};
 const getAuthHeader = () => {
   const auth = localStorage.getItem("jwt");
   if (!auth) {
