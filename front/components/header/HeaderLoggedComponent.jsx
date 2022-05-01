@@ -1,12 +1,9 @@
 import Link from "next/link";
+import { useContext } from "react";
+import AppContext from "../AppContext.jsx";
 
 export const HeaderLoggedComponent = () => {
-  const { setAuth } = useContext(AppContext);
-
-  const handleLogout = () => {
-    logoutRequest();
-    setAuth(null);
-  };
+  const { handleLogout } = useContext(AppContext);
   return (
     <>
       <Link href="/">

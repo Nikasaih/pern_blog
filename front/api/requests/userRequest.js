@@ -16,6 +16,7 @@ export const registerRequest = async ({ password, email, displayName }) => {
 export const signInRequest = async ({ email, password }) => {
   const response = await axios.post(signInRoute, { email, password });
   localStorage.setItem("jwt", response.data);
+  return response.data;
 };
 
 export const deleteMyAccountRequest = () => {

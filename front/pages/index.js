@@ -22,7 +22,6 @@ const Index = () => {
       {posts &&
         posts.map((e, index) => (
           <div>
-            {" "}
             <DisplayPostComponent
               key={index}
               title={e.title}
@@ -30,7 +29,7 @@ const Index = () => {
               publicatedAt={e.publicatedAt}
               authorId={e.authorId}
             />
-            <Link href={`/posts/${e.id}`}>
+            <Link key={`link${index}`} href={`/posts/${e.id}`}>
               <a>Voir plus</a>
             </Link>
           </div>

@@ -1,9 +1,9 @@
-import { Authentication } from "../components/Authentication.jsx";
+import { AuthenticationComponent } from "../components/AuthenticationComponent.jsx";
 
 const Auth = () => {
   return (
     <div>
-      <Authentication />
+      <AuthenticationComponent />
     </div>
   );
 };

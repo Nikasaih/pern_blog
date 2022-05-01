@@ -1,15 +1,24 @@
 import { signInSchema } from "../api/routesBodySchema/userModelSchema.js";
 import { Field, Formik } from "formik";
+import { useContext } from "react";
+import { registerRequest, signInRequest } from "../api/requests/userRequest.js";
+import AppContext from "./AppContext.jsx";
+import Router from "next/router";
+
 const initialValues = { password: "", email: "", displayName: "" };
 
 export const RegisterComponent = () => {
+  const { handleLogin, authData } = useContext(AppContext);
+
   const handleAuthenticationSubmit = async (
     { password, email, displayName },
     { resetForm }
   ) => {
     await registerRequest({ password, email, displayName });
-    await signInRequest({ password, email });
+    const response = await signInRequest({ password, email });
+    handleLogin(response);
     resetForm();
+    Router.push("/");
   };
 
   return (

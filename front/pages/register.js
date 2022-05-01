@@ -1,9 +1,9 @@
-import { Register } from "../components/Register.jsx";
+import { RegisterComponent } from "../components/RegisterComponent.jsx";
 
 const RegisterPage = () => {
   return (
     <div>
-      <Register />
+      <RegisterComponent />
     </div>
   );
 };
