@@ -3,6 +3,7 @@ import {
   deleteOnePostByIdRoute,
   getAllPostRoute,
   getOnePostByIdRoute,
+  createNewPostRoute,
 } from "../routes/postRoutes.js";
 
 export const getAllPostRequest = () => {
@@ -15,4 +16,18 @@ export const getPostByIdRequest = (id) => {
 
 export const deletePostByIdRequest = (id) => {
   return axios.delete(deleteOnePostByIdRoute(id));
+};
+
+export const createNewPostRequest = ({
+  title,
+  content,
+  isPublish,
+  authorId,
+}) => {
+  return axios.post(createNewPostRoute, {
+    title,
+    content,
+    isPublish,
+    authorId,
+  });
 };

@@ -1,12 +1,12 @@
 import { rootRoute } from "./rootRoute.js";
 
 export const rootCommentRoute = rootRoute + "/comments";
-export const postNewComment = rootCommentRoute;
-export const getAllComment = rootCommentRoute;
+export const createNewCommentRoute = rootCommentRoute;
+export const getAllCommentRoute = rootCommentRoute;
 
-export const getOneCommentById = (id) => {
-  return `${rootRoute}/${getAllComment}/${id}`;
+export const getOneCommentByIdRoute = (id) => {
+  return `${rootRoute}/${getAllCommentRoute}/${id}`;
 };
-export const deleteOneCommentById = (id) => {
-  return `${rootRoute}/${getAllComment}/${id}`;
+export const deleteOneCommentByIdRoute = (id) => {
+  return `${rootRoute}/${getAllCommentRoute}/${id}`;
 };

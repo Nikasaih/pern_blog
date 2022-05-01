@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  createNewCommentRoute,
   deleteOneCommentByIdRoute,
   getAllCommentRoute,
   getOneCommentByIdRoute,
@@ -15,4 +16,12 @@ export const getCommentByIdRequest = (id) => {
 
 export const deleteCommentByIdRequest = (id) => {
   return axios.delete(deleteOneCommentByIdRoute(id));
+};
+
+export const createNewCommentRequest = ({ postId, content, authorId }) => {
+  return axios.post(createNewCommentRoute, {
+    postId,
+    content,
+    authorId,
+  });
 };
