@@ -10,6 +10,10 @@ import {
 } from "../services/hasAuthorityServices.js";
 
 const userRoutes = ({ app }) => {
+  app.get("/users", async (req, res) => {
+    res.send(await UserModel.getAllUser());
+  });
+
   app.post("/register", async (req, res) => {
     const { body } = req;
 

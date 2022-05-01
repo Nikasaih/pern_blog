@@ -1,5 +1,7 @@
 import { createCommentSchema } from "../models/modelsSchema/commentModelSchema.js";
 import { CommentModel } from "../models/modelsClass/commentModel.js";
+import { hasBasicAuthority } from "../services/hasAuthorityServices.js";
+import { jwtAuthMidleware } from "../midlewares/jwtAuthMidleware.js";
 
 const commentRoutes = ({ app }) => {
   app.get("/comments", async (req, res) => {
@@ -18,15 +20,20 @@ const commentRoutes = ({ app }) => {
     res.send(comment);
   });
 
-  app.post("/comments", async (req, res) => {
-    const { body } = req;
-
+  app.post("/comments", jwtAuthMidleware, async (req, res) => {
+    const { body, auth } = req;
+    if (!hasBasicAuthority(auth.role)) {
+      res.status(401);
+      return;
+    }
     if (!createCommentSchema.validate(body)) {
       res.status(403);
       return;
     }
 
-    const created = await CommentModel.createOne(newComment);
+    const commentToSave = { ...body, authorId: auth.id };
+
+    const created = await CommentModel.createOne(commentToSave);
     res.status(201).send(created);
   });
 

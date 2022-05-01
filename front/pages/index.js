@@ -1,6 +1,6 @@
 import styles from "../styles/Home.module.css";
 import React, { useState, useEffect } from "react";
-import { Post } from "../components/Post.jsx";
+import { DisplayPost } from "../components/post/DisplayPost.jsx";
 import { getAllPostRequest } from "../api/requests/postRequest.js";
 
 const Index = () => {
@@ -20,7 +20,7 @@ const Index = () => {
       <p>Index</p>
       {posts &&
         posts.map((e, index) => (
-          <Post
+          <DisplayPost
             key={index}
             title={e.title}
             content={e.content}

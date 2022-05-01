@@ -18,6 +18,11 @@ export class PostModel extends Model {
     return PostModel.query().insert(data);
   }
 
+  static async createOneAndPublish(data) {
+    const toPublish = { ...data, publicatedAt: currentDateTime() };
+    return PostModel.query().insert(toPublish);
+  }
+
   static async deleteOneById(id) {
     return PostModel.query().deleteById(id);
   }

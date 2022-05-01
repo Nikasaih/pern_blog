@@ -1,4 +1,9 @@
-export const Post = ({ title, content, publicatedAt, authorId }) => {
+export const DisplayPostComponent = ({
+  title,
+  content,
+  publicatedAt,
+  authorId,
+}) => {
   return (
     <div>
       <h2>{title}</h2>

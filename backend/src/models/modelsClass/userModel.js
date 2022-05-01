@@ -74,4 +74,13 @@ export class UserModel extends Model {
   static async deleteAccount(id) {
     return UserModel.query().deleteById(id);
   }
+
+  static async getAllUser() {
+    const users = await UserModel.query();
+    return users.map((user) => {
+      delete user.passwordSalt;
+      delete user.passwordHash;
+      return user;
+    });
+  }
 }

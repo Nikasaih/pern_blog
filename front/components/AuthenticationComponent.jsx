@@ -1,8 +1,10 @@
 import { signInSchema } from "../api/routesBodySchema/userModelSchema.js";
-import { Field, Form, Formik, FormikProps } from "formik";
+import { Field, Formik } from "formik";
+import { signInRequest } from "../api/requests/userRequest.js";
+
 const initialValues = { password: "", email: "" };
 
-export const Authentication = () => {
+export const AuthenticationComponent = () => {
   const handleAuthenticationSubmit = async (
     { password, email },
     { resetForm }

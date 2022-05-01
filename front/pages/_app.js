@@ -1,6 +1,6 @@
 import { AppContextProvider } from "../components/AppContext.jsx";
 import "../styles/globals.css";
-import { Header } from "./../components/Header.jsx";
+import { Header } from "./../components/header/Header.jsx";
 function MyApp({ Component, pageProps }) {
   return (
     <>

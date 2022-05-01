@@ -38,7 +38,6 @@ export const banUserRequest = (id) => {
 
 export const logoutRequest = () => {
   localStorage.setItem("jwt", null);
-  console.log("gtoitj");
 };
 const getAuthHeader = () => {
   const auth = localStorage.getItem("jwt");

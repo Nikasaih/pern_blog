@@ -1,5 +1,7 @@
 import { PostModel } from "../models/modelsClass/postModel.js";
 import { createPostSchema } from "../models/modelsSchema/postModelSchema.js";
+import { hasAuthorAuthority } from "../services/hasAuthorityServices.js";
+import { jwtAuthMidleware } from "../midlewares/jwtAuthMidleware.js";
 
 const baseRoute = "/posts";
 
@@ -20,20 +22,27 @@ const postRoutes = ({ app }) => {
     res.send(post);
   });
 
-  app.post("/posts", async (req, res) => {
-    const { body } = req;
+  app.post("/posts", jwtAuthMidleware, async (req, res) => {
+    const { body, auth } = req;
+    if (!hasAuthorAuthority(auth.role)) {
+      res.status(401);
+      return;
+    }
+
     if (!createPostSchema.validate(body)) {
       res.status(403);
       return;
     }
-
-    const created = await PostModel.createOne(body);
+    const postToSave = { ...body, authorId: auth.id };
     if (body.isPublish === true) {
-      res.status(401).send(await PostModel.publishById(created.id));
+      res.status(201).send(await PostModel.createOneAndPublish(postToSave));
       return;
     }
+    const created = await PostModel.createOne(postToSave);
     res.status(201).send(created);
   });
+
+  //Todo publishPostByid
 
   app.delete("/posts/:postId", async (req, res) => {
     const {
