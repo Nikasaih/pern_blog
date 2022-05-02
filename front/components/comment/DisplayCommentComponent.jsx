@@ -7,9 +7,8 @@ export const DisplayCommentComponent = ({
   writedAt,
   authorId,
 }) => {
-  const {
-    authData: { id },
-  } = useContext(AppContext);
+  const { authData } = useContext(AppContext);
+
   return (
     <div>
       <p>{content}</p>
@@ -17,7 +16,7 @@ export const DisplayCommentComponent = ({
         <small>{writedAt}</small>
       </p>
       <p>{authorId}</p>
-      {id === authorId ? (
+      {authData && authData.id === authorId ? (
         <button onClick={deleteCommentByIdRequest(commentId)}>Delete</button>
       ) : null}
     </div>

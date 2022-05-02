@@ -4,6 +4,7 @@ import {
   deleteOneCommentByIdRoute,
   getAllCommentRoute,
   getOneCommentByIdRoute,
+  getCommentsByPostRoute,
 } from "../routes/commentRoutes.js";
 
 export const getAllCommentRequest = () => {
@@ -24,4 +25,8 @@ export const createNewCommentRequest = ({ postId, content, authorId }) => {
     content,
     authorId,
   });
+};
+
+export const getCommentsByPostRequest = (postId) => {
+  return axios.get(getCommentsByPostRoute(postId));
 };

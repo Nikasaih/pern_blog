@@ -1,19 +1,21 @@
-import { signInSchema } from "../api/routesBodySchema/userModelSchema.js";
 import { Field, Formik } from "formik";
 import { createNewCommentRequest } from "../../api/requests/commentRequest.js";
+import { validationSchema } from "../../api/routesBodySchema/commentModelSchema.js";
 
 const initialValues = { content: "" };
 
 export const CreateCommentComponent = ({ postId }) => {
-  const handleAuthenticationSubmit = async ({ content }, { resetForm }) => {
+  const handleCreateCommentSubmit = async ({ content }, { resetForm }) => {
+    console.log("jeia");
+
     await createNewCommentRequest({ content, postId });
     resetForm();
   };
 
   return (
     <Formik
-      validationSchema={signInSchema}
-      onSubmit={handleAuthenticationSubmit}
+      validationSchema={validationSchema}
+      onSubmit={handleCreateCommentSubmit}
       initialValues={initialValues}
     >
       {({ isSubmitting, isValid, handleSubmit }) => {
@@ -23,11 +25,10 @@ export const CreateCommentComponent = ({ postId }) => {
             noValidate
             className="flex flex-col gap-4 p-4"
           >
-            <Field name="title" placeholder="Enter your email" />
-            <Field name="content" placeholder="Enter your email" />
+            <Field name="content" placeholder="Enter the content" />
 
             <button disabled={!isValid || isSubmitting} type="submit">
-              Sign-in
+              Post comment
             </button>
           </form>
         );

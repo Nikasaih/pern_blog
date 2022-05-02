@@ -21,15 +21,14 @@ const Index = () => {
       <p>Index</p>
       {posts &&
         posts.map((e, index) => (
-          <div>
+          <div key={index}>
             <DisplayPostComponent
-              key={index}
               title={e.title}
               content={e.content}
               publicatedAt={e.publicatedAt}
               authorId={e.authorId}
             />
-            <Link key={`link${index}`} href={`/posts/${e.id}`}>
+            <Link href={`/posts/${e.id}`}>
               <a>Voir plus</a>
             </Link>
           </div>

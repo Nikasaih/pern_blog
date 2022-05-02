@@ -10,3 +10,7 @@ export const getOneCommentByIdRoute = (id) => {
 export const deleteOneCommentByIdRoute = (id) => {
   return `${rootRoute}/${getAllCommentRoute}/${id}`;
 };
+
+export const getCommentsByPostRoute = (postId) => {
+  return `${rootCommentRoute}/by-post/${postId}`;
+};

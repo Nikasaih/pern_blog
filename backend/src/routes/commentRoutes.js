@@ -20,9 +20,22 @@ const commentRoutes = ({ app }) => {
     res.send(comment);
   });
 
+  app.get("/comments/by-post/:postId", async (req, res) => {
+    const {
+      params: { postId },
+    } = req;
+    const comments = await CommentModel.query();
+
+    const response = comments.filter(
+      (comment) => comment.postId === parseInt(postId)
+    );
+
+    res.send(response);
+  });
+
   app.post("/comments", jwtAuthMidleware, async (req, res) => {
     const { body, auth } = req;
-    if (!hasBasicAuthority(auth.role)) {
+    if (!auth || !hasBasicAuthority(auth.role)) {
       res.status(401);
       return;
     }

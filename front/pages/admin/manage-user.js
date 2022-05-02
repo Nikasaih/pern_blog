@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { getAllUserRequest } from "../../api/requests/userRequest.js";
-import { UserRole } from "../../api/utils/userRoleEnum.js";
-import { hasAdminAuthority } from "../../api/utils/utils.js";
+import { hasAdminAuthority } from "../../api/utils/hasAuthorityServices.js";
 import { ManageUserComponent } from "../../components/admin/ManageUserComponent.jsx";
 import { AppContext } from "../../components/AppContext.jsx";
 

@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { useContext } from "react";
+import {
+  hasAdminAuthority,
+  hasAuthorAuthority,
+} from "../../../backend/src/services/hasAuthorityServices.js";
 import AppContext from "../AppContext.jsx";
+import { HeaderForAdminComponent } from "./HeaderForAdminComponent.jsx";
 import { HeaderLoggedComponent } from "./HeaderLoggedComponent.jsx";
 import { HeaderUnLoggedComponent } from "./HeaderUnLoggedComponent.jsx";
 export const HeaderComponent = () => {
@@ -11,13 +16,16 @@ export const HeaderComponent = () => {
         <a>||Tous les Posts ||</a>
       </Link>
 
-      <Link href="/admin/manage-user">
-        <a>|| admin debug ||</a>
-      </Link>
-
       {!authData && <HeaderUnLoggedComponent />}
 
       {authData && <HeaderLoggedComponent />}
+
+      {authData && hasAuthorAuthority(authData.role) && (
+        <HeaderForAdminComponent />
+      )}
+      {authData && hasAdminAuthority(authData.role) && (
+        <HeaderForAdminComponent />
+      )}
     </header>
   );
 };
