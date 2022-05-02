@@ -9,7 +9,10 @@ const ManageUser = () => {
 
   const [users, setUsers] = useState();
 
-  const loadUsers = async () => {
+  const loadUsers = async (asyncFt) => {
+    if (asyncFt) {
+      await asyncFt();
+    }
     const response = await getAllUserRequest();
     setUsers(response.data);
   };
@@ -27,15 +30,17 @@ const ManageUser = () => {
   return (
     <div>
       {users &&
-        users.map((user) => {
+        users.map((user, index) => {
           return (
             <ManageUserComponent
+              key={index}
               email={user.email}
               role={user.role}
               suspendedAt={user.suspendedAt}
               suspensionAmount={user.suspensionAmount}
               supensionDuration={user.supensionDuration}
               id={user.id}
+              handleUpdateUsers={loadUsers}
             />
           );
         })}

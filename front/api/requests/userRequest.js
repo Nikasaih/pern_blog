@@ -24,6 +24,7 @@ export const deleteMyAccountRequest = () => {
 };
 
 export const suspendUserRequest = (id) => {
+  console.log("id: " + id);
   const headers = { headers: { ...getAuthHeader() } };
   return axios.post(suspendUserByIdRoute(id), {}, headers);
 };

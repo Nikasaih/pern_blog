@@ -11,7 +11,22 @@ export const ManageUserComponent = ({
   suspendedAt,
   suspensionAmount,
   supensionDuration,
+  handleUpdateUsers,
 }) => {
+  const handleUnSuspendUser = async () => {
+    await unSuspendUserRequest(id);
+    await handleUpdateUsers();
+  };
+
+  const handleSuspendUser = async () => {
+    await suspendUserRequest(id);
+    await handleUpdateUsers();
+  };
+
+  const handleBanUser = async () => {
+    await banUserRequest(id);
+    await handleUpdateUsers();
+  };
   return (
     <div>
       <h2>{email}</h2>
@@ -22,29 +37,12 @@ export const ManageUserComponent = ({
         <>
           <p>suspendedAt {suspendedAt}</p>
           <p>supensionDuration {supensionDuration}</p>
-          <button
-            onClick={() => {
-              unSuspendUserRequest(id);
-            }}
-          >
-            UnSuspend
-          </button>
+          <button onClick={handleUnSuspendUser}>UnSuspend</button>
         </>
       )}
-      <button
-        onClick={() => {
-          suspendUserRequest(id);
-        }}
-      >
-        Suspend
-      </button>
-      <button
-        onClick={() => {
-          banUserRequest(id);
-        }}
-      >
-        Ban user
-      </button>
+
+      {!suspendedAt && <button onClick={handleSuspendUser}>Suspend</button>}
+      <button onClick={handleBanUser}>Ban user</button>
     </div>
   );
 };

@@ -63,8 +63,9 @@ const userRoutes = ({ app }) => {
     } = req;
 
     if (hasAdminAuthority(auth.role)) {
-      UserModel.suspendAccount(userId, 10);
-      res.status(202).send(`user with id : ${id} has been suspend`);
+      UserModel.suspendAccount(parseInt(userId), 10);
+      res.status(202).send(`user with id : ${userId} has been suspend`);
+      return;
     }
 
     res.status(403).send("you're not allow to suspend a user");
@@ -77,8 +78,9 @@ const userRoutes = ({ app }) => {
     } = req;
 
     if (hasAdminAuthority(auth.role)) {
-      UserModel.unSuspendAccount(userId);
-      res.status(202).send(`user with id : ${id} has been unsuspend`);
+      UserModel.unSuspendAccount(parseInt(userId));
+      res.status(202).send(`user with id : ${userId} has been unsuspend`);
+      return;
     }
 
     res.status(403).send("you're not allow to unsuspend a user");
@@ -91,8 +93,9 @@ const userRoutes = ({ app }) => {
     } = req;
 
     if (hasAdminAuthority(auth.role)) {
-      UserModel.banAccount(userId);
-      res.status(202).send(`user with id : ${id} has been ban`);
+      UserModel.banAccount(parseInt(userId));
+      res.status(202).send(`user with id : ${userId} has been ban`);
+      return;
     }
 
     res.status(403).send("you're not allow to ban a user");

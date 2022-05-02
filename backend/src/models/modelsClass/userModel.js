@@ -4,6 +4,7 @@ import {
   hashPassword,
   validatePassword,
 } from "../../services/pwHashServices.js";
+import { currentDateTime } from "../../utils/dateUtils.js";
 import { UserRole } from "../../utils/userRoleEnum.js";
 const defaultRegistration = {
   role: UserRole.BASIC,
@@ -49,15 +50,18 @@ export class UserModel extends Model {
     return UserModel.query().insertAndFetch(userToStore);
   }
 
-  static async suspendAccount(id, duration) {
-    const suspendedAmount =
-      (await UserModel.query().findById(id).suspensionAmount) + 1;
+  static async suspendAccount(id, suspensionDuration) {
+    const user = await UserModel.query().findById(id);
 
-    return UserModel.query().findById(id).patch({
-      suspendedAt: Date.now(),
-      supensionDuration: duration,
-      suspensionAmount: suspendedAmount,
-    });
+    const suspensionAmount = user.suspensionAmount + 1;
+    console.log(suspensionAmount);
+    return UserModel.query()
+      .findById(id)
+      .patch({
+        suspendedAt: currentDateTime(),
+        supensionDuration: currentDateTime(suspensionDuration),
+        suspensionAmount,
+      });
   }
 
   static async unSuspendAccount(id) {
@@ -68,6 +72,7 @@ export class UserModel extends Model {
   }
 
   static async banAccount(id) {
+    //todo delete related post and comment
     this.deleteAccount(id);
   }
 
