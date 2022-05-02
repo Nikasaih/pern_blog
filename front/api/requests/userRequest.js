@@ -40,7 +40,7 @@ export const banUserRequest = (id) => {
 
 export const getAllUserRequest = () => {
   const headers = { headers: { ...getAuthHeader() } };
-  return axios.get(getAllUserRoute, {}, headers);
+  return axios.get(getAllUserRoute, headers);
 };
 
 export const logoutRequest = () => {

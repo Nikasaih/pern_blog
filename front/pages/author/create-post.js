@@ -1,6 +1,7 @@
+import { useContext, useEffect } from "react";
 import { hasAuthorAuthority } from "../../api/utils/hasAuthorityServices.js";
 import { CreatePostComponent } from "../../components/post/CreatePostComponent.jsx";
-
+import { AppContext } from "../../components/AppContext.jsx";
 const CreatePost = () => {
   const { authData } = useContext(AppContext);
 
@@ -12,6 +13,7 @@ const CreatePost = () => {
       return;
     }
   }, [authData]);
+
   return (
     <div>
       <CreatePostComponent />

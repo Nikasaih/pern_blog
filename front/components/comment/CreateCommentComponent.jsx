@@ -6,8 +6,6 @@ const initialValues = { content: "" };
 
 export const CreateCommentComponent = ({ postId }) => {
   const handleCreateCommentSubmit = async ({ content }, { resetForm }) => {
-    console.log("jeia");
-
     await createNewCommentRequest({ content, postId });
     resetForm();
   };

@@ -1,5 +1,11 @@
+import Link from "next/link";
+
 export const HeaderForAdminComponent = () => {
-  <Link href="/admin/manage-user">
-    <a>|| admin debug ||</a>
-  </Link>;
+  return (
+    <>
+      <Link href="/admin/manage-user">
+        <a>Admin </a>
+      </Link>
+    </>
+  );
 };

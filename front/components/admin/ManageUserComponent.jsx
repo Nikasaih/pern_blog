@@ -1,9 +1,10 @@
 import {
   banUserRequest,
+  suspendUserRequest,
   unSuspendUserRequest,
 } from "../../api/requests/userRequest.js";
 
-const ManageUserComponent = ({
+export const ManageUserComponent = ({
   id,
   email,
   role,
@@ -30,12 +31,20 @@ const ManageUserComponent = ({
           </button>
         </>
       )}
-      <button onClick={unSuspendUserRequest(id)}>Suspend</button>
+      <button
+        onClick={() => {
+          suspendUserRequest(id);
+        }}
+      >
+        Suspend
+      </button>
       <button
         onClick={() => {
           banUserRequest(id);
         }}
-      ></button>
+      >
+        Ban user
+      </button>
     </div>
   );
 };

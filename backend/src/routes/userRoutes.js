@@ -97,6 +97,19 @@ const userRoutes = ({ app }) => {
 
     res.status(403).send("you're not allow to ban a user");
   });
+
+  //Todo delete in prod (only local test)
+  app.post("/register-admin", async (req, res) => {
+    const { body } = req;
+
+    if (!registerSchema.validateSync(body)) {
+      res.status(400).send("you have not send valid request");
+      return;
+    }
+    await UserModel.registerUser(body);
+    await UserModel.promoteUserAsAdminByEmail(body.email);
+    res.status(201).send("registration complete");
+  });
 };
 
 export default userRoutes;

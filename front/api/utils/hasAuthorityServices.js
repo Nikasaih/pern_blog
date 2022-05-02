@@ -36,11 +36,9 @@ export const hasAuthorAuthority = (auth) => {
     Router.push("/sign-in");
     return false;
   }
-
-  if (hasAuthorRole(auth.role) || hasAdminRole(auth.role)) {
+  if (hasAdminRole(auth.payload.role) || hasAuthorRole(auth.payload.role)) {
     return true;
   }
-
   Router.push("/");
   return false;
 };
@@ -50,10 +48,9 @@ export const hasAdminAuthority = (auth) => {
     Router.push("/sign-in");
     return false;
   }
-  if (hasAdminRole(auth.role)) {
+  if (hasAdminRole(auth.payload.role)) {
     return true;
   }
-
   Router.push("/");
   return false;
 };

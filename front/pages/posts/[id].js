@@ -48,6 +48,7 @@ const PostDetails = () => {
             authorId={post.authorId}
           />
           {authData && post.authorId === authData.id && <button>Delete</button>}
+
           {comments &&
             comments.map((comment, index) => {
               return (

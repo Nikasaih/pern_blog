@@ -6,6 +6,7 @@ import {
 } from "../../../backend/src/services/hasAuthorityServices.js";
 import AppContext from "../AppContext.jsx";
 import { HeaderForAdminComponent } from "./HeaderForAdminComponent.jsx";
+import { HeaderForAuthorComponent } from "./HeaderForAuthorComponent.jsx";
 import { HeaderLoggedComponent } from "./HeaderLoggedComponent.jsx";
 import { HeaderUnLoggedComponent } from "./HeaderUnLoggedComponent.jsx";
 export const HeaderComponent = () => {
@@ -20,10 +21,11 @@ export const HeaderComponent = () => {
 
       {authData && <HeaderLoggedComponent />}
 
-      {authData && hasAuthorAuthority(authData.role) && (
-        <HeaderForAdminComponent />
+      {authData && hasAuthorAuthority(authData.payload.role) && (
+        <HeaderForAuthorComponent />
       )}
-      {authData && hasAdminAuthority(authData.role) && (
+
+      {authData && hasAdminAuthority(authData.payload.role) && (
         <HeaderForAdminComponent />
       )}
     </header>
