@@ -1,17 +1,18 @@
-import { Field, Formik } from "formik";
-import { createNewPostRequest } from "../../api/requests/postRequest.js";
-import { createPostSchema } from "../../api/routesBodySchema/postModelSchema.js";
+import { Formik } from "formik"
+import { createNewPostRequest } from "../../api/requests/postRequest.js"
+import { createPostSchema } from "../../api/routesBodySchema/postModelSchema.js"
+import { MyButton } from "../other/MyButton.jsx"
 
-const initialValues = { title: "", content: "", isPublish: false };
+const initialValues = { title: "", content: "", isPublish: false }
 
 export const CreatePostComponent = () => {
   const handleAuthenticationSubmit = async (
     { title, content, isPublish },
     { resetForm }
   ) => {
-    await createNewPostRequest({ title, content, isPublish });
-    resetForm();
-  };
+    await createNewPostRequest({ title, content, isPublish })
+    resetForm()
+  }
 
   return (
     <Formik
@@ -26,23 +27,25 @@ export const CreatePostComponent = () => {
             noValidate
             className="flex flex-col gap-4 p-4"
           >
-            <Field name="title" placeholder="Enter your title" />
-            <Field name="content" placeholder="Enter your content" />
+            <MyFieldField name="title" placeholder="Enter your title" />
+            <MyFieldField name="content" placeholder="Enter your content" />
             <div>
               <p>Publish now</p>
-              <Field
+              <MyFieldField
                 name="isPublish"
                 type="checkbox"
                 placeholder="Enter your password"
               />
             </div>
 
-            <button disabled={!isValid || isSubmitting} type="submit">
-              Sign-in
-            </button>
+            <MyButton
+              disabled={!isValid || isSubmitting}
+              type="submit"
+              text={"Create post"}
+            />
           </form>
-        );
+        )
       }}
     </Formik>
-  );
-};
+  )
+}

@@ -1,17 +1,19 @@
-import { signInSchema } from "../api/routesBodySchema/userModelSchema.js";
-import { Field, Formik } from "formik";
-import { signInRequest } from "../api/requests/userRequest.js";
+import { signInSchema } from "../api/routesBodySchema/userModelSchema.js"
+import { Field, Formik } from "formik"
+import { signInRequest } from "../api/requests/userRequest.js"
+import { MyButton } from "./other/MyButton.jsx"
+import { MyFieldField } from "./other/MyFieldField.jsx"
 
-const initialValues = { password: "", email: "" };
+const initialValues = { password: "", email: "" }
 
 export const AuthenticationComponent = () => {
   const handleAuthenticationSubmit = async (
     { password, email },
     { resetForm }
   ) => {
-    await signInRequest({ password, email });
-    resetForm();
-  };
+    await signInRequest({ password, email })
+    resetForm()
+  }
 
   return (
     <Formik
@@ -26,18 +28,24 @@ export const AuthenticationComponent = () => {
             noValidate
             className="flex flex-col gap-4 p-4"
           >
-            <Field type="email" name="email" placeholder="Enter your email" />
-            <Field
+            <MyFieldField
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+            />
+            <MyFieldField
               name="password"
               type="password"
               placeholder="Enter your password"
             />
-            <button disabled={!isValid || isSubmitting} type="submit">
-              Sign-in
-            </button>
+            <MyButton
+              disabled={!isValid || isSubmitting}
+              type="submit"
+              text={"Sign-in"}
+            />
           </form>
-        );
+        )
       }}
     </Formik>
-  );
-};
+  )
+}

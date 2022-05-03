@@ -18,7 +18,6 @@ const Index = () => {
 
   return (
     <div className={styles.container}>
-      <p>Index</p>
       {posts &&
         posts.map((e, index) => (
           <div key={index}>
