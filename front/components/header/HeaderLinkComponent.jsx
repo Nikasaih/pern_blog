@@ -8,7 +8,7 @@ export const HeaderLinkComponent = ({ href, text, onClickAction }) => {
   }
   return (
     <Link href={href}>
-      <a onClick={handleOnClick} className="underline decoration-sky-500">
+      <a onClick={handleOnClick} className="px-3 underline decoration-sky-500">
         {text}
       </a>
     </Link>

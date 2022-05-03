@@ -5,13 +5,13 @@ export const DisplayPostComponent = ({
   authorId,
 }) => {
   return (
-    <div>
-      <h2>{title}</h2>
+    <div className="pl-5 pt-5">
+      <div className="flex flex-row">
+        <h2 className="text-2xl">{title}</h2>
+        <small className="pl-3">{publicatedAt}</small>
+      </div>
       <p>{content}</p>
-      <p>
-        <small>{publicatedAt}</small>
-      </p>
-      <p>{authorId}</p>
+      <p>author : {authorId}</p>
     </div>
-  );
-};
+  )
+}

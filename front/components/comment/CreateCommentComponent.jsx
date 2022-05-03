@@ -1,14 +1,14 @@
-import { Field, Formik } from "formik";
-import { createNewCommentRequest } from "../../api/requests/commentRequest.js";
-import { validationSchema } from "../../api/routesBodySchema/commentModelSchema.js";
+import { Field, Formik } from "formik"
+import { createNewCommentRequest } from "../../api/requests/commentRequest.js"
+import { validationSchema } from "../../api/routesBodySchema/commentModelSchema.js"
 
-const initialValues = { content: "" };
+const initialValues = { content: "" }
 
 export const CreateCommentComponent = ({ postId }) => {
   const handleCreateCommentSubmit = async ({ content }, { resetForm }) => {
-    await createNewCommentRequest({ content, postId });
-    resetForm();
-  };
+    await createNewCommentRequest({ content, postId })
+    resetForm()
+  }
 
   return (
     <Formik
@@ -29,8 +29,8 @@ export const CreateCommentComponent = ({ postId }) => {
               Post comment
             </button>
           </form>
-        );
+        )
       }}
     </Formik>
-  );
-};
+  )
+}

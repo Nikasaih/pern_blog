@@ -1,16 +1,17 @@
-import { useContext } from "react";
-import { AppContext } from "../AppContext.jsx";
+import { useContext } from "react"
+import { AppContext } from "../AppContext.jsx"
 
 export const DisplayCommentComponent = ({
   id: commentId,
   content,
   writedAt,
   authorId,
+  className,
 }) => {
-  const { authData } = useContext(AppContext);
+  const { authData } = useContext(AppContext)
 
   return (
-    <div>
+    <div className={className}>
       <p>{content}</p>
       <p>
         <small>{writedAt}</small>
@@ -20,5 +21,5 @@ export const DisplayCommentComponent = ({
         <button onClick={deleteCommentByIdRequest(commentId)}>Delete</button>
       ) : null}
     </div>
-  );
-};
+  )
+}

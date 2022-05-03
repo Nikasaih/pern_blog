@@ -29,7 +29,7 @@ const Index = () => {
               authorId={e.authorId}
             />
             <Link href={`/posts/${e.id}`}>
-              <a>Voir plus</a>
+              <a className="pl-5 pt-5">Voir plus</a>
             </Link>
           </div>
         ))}

@@ -1,39 +1,39 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
-import { getPostByIdRequest } from "../../api/requests/postRequest.js";
-import AppContext from "../../components/AppContext.jsx";
-import { getCommentsByPostRequest } from "../../api/requests/commentRequest.js";
-import { DisplayCommentComponent } from "../../components/comment/DisplayCommentComponent.jsx";
-import { DisplayPostComponent } from "../../components/post/DisplayPostComponent.jsx";
-import { CreateCommentComponent } from "../../components/comment/CreateCommentComponent.jsx";
+import React, { useState, useEffect, useContext } from "react"
+import { useRouter } from "next/router"
+import { getPostByIdRequest } from "../../api/requests/postRequest.js"
+import AppContext from "../../components/AppContext.jsx"
+import { getCommentsByPostRequest } from "../../api/requests/commentRequest.js"
+import { DisplayCommentComponent } from "../../components/comment/DisplayCommentComponent.jsx"
+import { DisplayPostComponent } from "../../components/post/DisplayPostComponent.jsx"
+import { CreateCommentComponent } from "../../components/comment/CreateCommentComponent.jsx"
 
 const PostDetails = () => {
-  const { authData } = useContext(AppContext);
+  const { authData } = useContext(AppContext)
 
-  const router = useRouter();
-  const { id } = router.query;
-  const [post, setPost] = useState();
-  const [comments, setComments] = useState();
+  const router = useRouter()
+  const { id } = router.query
+  const [post, setPost] = useState()
+  const [comments, setComments] = useState()
 
-  const [fetchError, setFetchError] = useState();
+  const [fetchError, setFetchError] = useState()
   const loadPosts = async () => {
     try {
-      const postResponse = await getPostByIdRequest(id);
-      setPost(postResponse.data);
+      const postResponse = await getPostByIdRequest(id)
+      setPost(postResponse.data)
     } catch (err) {
-      setFetchError(err);
+      setFetchError(err)
     }
-  };
+  }
 
   const loadComments = async () => {
-    const commentResponse = await getCommentsByPostRequest(post.id);
-    setComments(commentResponse.data);
-  };
+    const commentResponse = await getCommentsByPostRequest(post.id)
+    setComments(commentResponse.data)
+  }
 
   useEffect(() => {
-    id && loadPosts();
-    post && !comments && loadComments();
-  }, [id, post]);
+    id && loadPosts()
+    post && !comments && loadComments()
+  }, [id, post])
 
   return (
     <div>
@@ -53,19 +53,20 @@ const PostDetails = () => {
             comments.map((comment, index) => {
               return (
                 <DisplayCommentComponent
+                  className="pl-5 pt-5"
                   key={index}
                   id={comment.id.toString()}
                   content={comment.content}
                   writedAt={comment.writedAt.toString()}
                   authorId={comment.authorId}
                 />
-              );
+              )
             })}
           {authData && <CreateCommentComponent postId={post.id} />}
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default PostDetails;
+export default PostDetails
