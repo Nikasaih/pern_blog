@@ -71,7 +71,6 @@ export class UserModel extends Model {
   }
 
   static async banAccount(id) {
-    //todo delete related post and comment
     this.deleteAccount(id);
   }
 
