@@ -111,7 +111,10 @@ const userRoutes = ({ app }) => {
       return;
     }
     await UserModel.registerUser(body);
-    await UserModel.promoteUserAsAdminByEmail(body.email);
+    if (!(await UserModel.promoteUserAsAdminByEmail(body.email))) {
+      res.status(500).send("some error occured ");
+      return;
+    }
     res.status(201).send("registration complete");
   });
 };

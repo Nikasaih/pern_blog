@@ -1,7 +1,7 @@
 import { signInSchema } from "../api/routesBodySchema/userModelSchema.js"
 import { Field, Formik } from "formik"
 import { signInRequest } from "../api/requests/userRequest.js"
-import { MyButton } from "./other/MyButton.jsx"
+import { MyFormButton } from "./other/MyFormButton.jsx"
 import { MyFieldField } from "./other/MyFieldField.jsx"
 
 const initialValues = { password: "", email: "" }
@@ -38,7 +38,7 @@ export const AuthenticationComponent = () => {
               type="password"
               placeholder="Enter your password"
             />
-            <MyButton
+            <MyFormButton
               disabled={!isValid || isSubmitting}
               type="submit"
               text={"Sign-in"}

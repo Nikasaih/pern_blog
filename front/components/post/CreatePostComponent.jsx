@@ -1,7 +1,8 @@
 import { Formik } from "formik"
 import { createNewPostRequest } from "../../api/requests/postRequest.js"
 import { createPostSchema } from "../../api/routesBodySchema/postModelSchema.js"
-import { MyButton } from "../other/MyButton.jsx"
+import { MyFormButton } from "../other/MyFormButton.jsx"
+import { MyFieldField } from "../other/MyFieldField.jsx"
 
 const initialValues = { title: "", content: "", isPublish: false }
 
@@ -38,7 +39,7 @@ export const CreatePostComponent = () => {
               />
             </div>
 
-            <MyButton
+            <MyFormButton
               disabled={!isValid || isSubmitting}
               type="submit"
               text={"Create post"}

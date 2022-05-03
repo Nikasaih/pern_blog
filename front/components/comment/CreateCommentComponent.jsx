@@ -1,7 +1,7 @@
 import { Formik } from "formik"
 import { createNewCommentRequest } from "../../api/requests/commentRequest.js"
 import { validationSchema } from "../../api/routesBodySchema/commentModelSchema.js"
-import { MyButton } from "../other/MyButton.jsx"
+import { MyFormButton } from "../other/MyFormButton.jsx"
 import { MyFieldField } from "../other/MyFieldField.jsx"
 
 const initialValues = { content: "" }
@@ -27,7 +27,7 @@ export const CreateCommentComponent = ({ postId }) => {
           >
             <MyFieldField name="content" placeholder="Enter the content" />
 
-            <MyButton
+            <MyFormButton
               disabled={!isValid || isSubmitting}
               type="submit"
               text={"Post comment"}

@@ -1,4 +1,4 @@
-export const MyButton = ({ text, disabled, type }) => {
+export const MyFormButton = ({ text, disabled, type }) => {
   return (
     <button
       disabled={disabled}

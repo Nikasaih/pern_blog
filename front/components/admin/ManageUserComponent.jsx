@@ -2,7 +2,8 @@ import {
   banUserRequest,
   suspendUserRequest,
   unSuspendUserRequest,
-} from "../../api/requests/userRequest.js";
+} from "../../api/requests/userRequest.js"
+import { MyAdminButton } from "../other/MyAdminButton.jsx"
 
 export const ManageUserComponent = ({
   id,
@@ -14,21 +15,21 @@ export const ManageUserComponent = ({
   handleUpdateUsers,
 }) => {
   const handleUnSuspendUser = async () => {
-    await unSuspendUserRequest(id);
-    await handleUpdateUsers();
-  };
+    await unSuspendUserRequest(id)
+    await handleUpdateUsers()
+  }
 
   const handleSuspendUser = async () => {
-    await suspendUserRequest(id);
-    await handleUpdateUsers();
-  };
+    await suspendUserRequest(id)
+    await handleUpdateUsers()
+  }
 
   const handleBanUser = async () => {
-    await banUserRequest(id);
-    await handleUpdateUsers();
-  };
+    await banUserRequest(id)
+    await handleUpdateUsers()
+  }
   return (
-    <div>
+    <div className="mt-5">
       <h2>{email}</h2>
       <p>{role}</p>
       <p>suspensionAmount {suspensionAmount}</p>
@@ -37,12 +38,33 @@ export const ManageUserComponent = ({
         <>
           <p>suspendedAt {suspendedAt}</p>
           <p>supensionDuration {supensionDuration}</p>
-          <button onClick={handleUnSuspendUser}>UnSuspend</button>
         </>
       )}
 
-      {!suspendedAt && <button onClick={handleSuspendUser}>Suspend</button>}
-      <button onClick={handleBanUser}>Ban user</button>
+      <div className="flex flex-row">
+        {suspendedAt && (
+          <MyAdminButton
+            onClick={handleUnSuspendUser}
+            disabled={false}
+            text={"UnSuspend"}
+            colorClass={"bg-indigo-600 hover:bg-indigo-700"}
+          />
+        )}
+        {!suspendedAt && (
+          <MyAdminButton
+            onClick={handleSuspendUser}
+            disabled={false}
+            text={"Suspend"}
+            colorClass={"bg-indigo-600 hover:bg-indigo-700"}
+          />
+        )}
+        <MyAdminButton
+          onClick={handleBanUser}
+          disabled={false}
+          text={"Ban user"}
+          colorClass={"bg-red-600 hover:bg-red-700"}
+        />
+      </div>
     </div>
-  );
-};
+  )
+}

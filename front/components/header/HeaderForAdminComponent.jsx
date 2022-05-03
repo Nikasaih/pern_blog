@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { HeaderLinkComponent } from "./HeaderLinkComponent.jsx"
 
 export const HeaderForAdminComponent = () => {
   return (

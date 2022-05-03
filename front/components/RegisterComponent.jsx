@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { registerRequest, signInRequest } from "../api/requests/userRequest.js"
 import AppContext from "./AppContext.jsx"
 import Router from "next/router"
-import { MyButton } from "./other/MyButton.jsx"
+import { MyFormButton } from "./other/MyFormButton.jsx"
 import { MyFieldField } from "./other/MyFieldField.jsx"
 import { Formik } from "formik"
 
@@ -48,7 +48,7 @@ export const RegisterComponent = () => {
             />
             <MyFieldField name="displayName" placeholder="Enter your pseudo" />
 
-            <MyButton
+            <MyFormButton
               disabled={!isValid || isSubmitting}
               type="submit"
               text={"Register"}

@@ -87,4 +87,14 @@ export class UserModel extends Model {
       return user;
     });
   }
+
+  static async promoteUserAsAdminByEmail(email) {
+    const user = await UserModel.findByEmail(email);
+    if (!user) {
+      return false;
+    }
+    user.role = UserRole.ADMIN;
+    await UserModel.query().updateAndFetchById(user.id, user);
+    return true;
+  }
 }
