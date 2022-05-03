@@ -1,4 +1,4 @@
-import { Formik } from "formik"
+import { Field, Formik } from "formik"
 import { createNewPostRequest } from "../../api/requests/postRequest.js"
 import { createPostSchema } from "../../api/routesBodySchema/postModelSchema.js"
 import { MyFormButton } from "../other/MyFormButton.jsx"
@@ -30,13 +30,9 @@ export const CreatePostComponent = () => {
           >
             <MyFieldField name="title" placeholder="Enter your title" />
             <MyFieldField name="content" placeholder="Enter your content" />
-            <div>
+            <div className="flex flex-row">
               <p>Publish now</p>
-              <MyFieldField
-                name="isPublish"
-                type="checkbox"
-                placeholder="Enter your password"
-              />
+              <Field className="" name="isPublish" type="checkbox" />
             </div>
 
             <MyFormButton

@@ -17,10 +17,6 @@ export const HeaderComponent = () => {
     <header>
       <HeaderLinkComponent href={"/"} text={"Tous les Posts"} />
 
-      {!authData && <HeaderUnLoggedComponent />}
-
-      {authData && <HeaderLoggedComponent />}
-
       {authData && hasAuthorAuthority(authData.payload.role) && (
         <HeaderForAuthorComponent />
       )}
@@ -28,6 +24,10 @@ export const HeaderComponent = () => {
       {authData && hasAdminAuthority(authData.payload.role) && (
         <HeaderForAdminComponent />
       )}
+
+      {!authData && <HeaderUnLoggedComponent />}
+
+      {authData && <HeaderLoggedComponent />}
     </header>
   )
 }

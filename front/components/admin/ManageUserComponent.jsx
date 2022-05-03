@@ -51,12 +51,20 @@ export const ManageUserComponent = ({
           />
         )}
         {!suspendedAt && (
-          <MyAdminButton
-            onClick={handleSuspendUser}
-            disabled={false}
-            text={"Suspend"}
-            colorClass={"bg-indigo-600 hover:bg-indigo-700"}
-          />
+          <>
+            <MyAdminButton
+              onClick={handleSuspendUser}
+              disabled={false}
+              text={"Suspend"}
+              colorClass={"bg-indigo-600 hover:bg-indigo-700"}
+            />
+            <MyAdminButton
+              onClick={handleSuspendUser}
+              disabled={false}
+              text={"Suspend"}
+              colorClass={"bg-indigo-600 hover:bg-indigo-700"}
+            />
+          </>
         )}
         <MyAdminButton
           onClick={handleBanUser}
