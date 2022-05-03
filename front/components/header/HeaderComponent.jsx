@@ -1,21 +1,21 @@
-import Link from "next/link";
-import { useContext } from "react";
+import Link from "next/link"
+import { useContext } from "react"
 import {
   hasAdminAuthority,
   hasAuthorAuthority,
-} from "../../../backend/src/services/hasAuthorityServices.js";
-import AppContext from "../AppContext.jsx";
-import { HeaderForAdminComponent } from "./HeaderForAdminComponent.jsx";
-import { HeaderForAuthorComponent } from "./HeaderForAuthorComponent.jsx";
-import { HeaderLoggedComponent } from "./HeaderLoggedComponent.jsx";
-import { HeaderUnLoggedComponent } from "./HeaderUnLoggedComponent.jsx";
+} from "../../../backend/src/services/hasAuthorityServices.js"
+import AppContext from "../AppContext.jsx"
+import { HeaderForAdminComponent } from "./HeaderForAdminComponent.jsx"
+import { HeaderForAuthorComponent } from "./HeaderForAuthorComponent.jsx"
+import { HeaderLinkComponent } from "./HeaderLinkComponent.jsx"
+import { HeaderLoggedComponent } from "./HeaderLoggedComponent.jsx"
+import { HeaderUnLoggedComponent } from "./HeaderUnLoggedComponent.jsx"
+
 export const HeaderComponent = () => {
-  const { authData } = useContext(AppContext);
+  const { authData } = useContext(AppContext)
   return (
     <header>
-      <Link href="/">
-        <a>||Tous les Posts ||</a>
-      </Link>
+      <HeaderLinkComponent href={"/"} text={"Tous les Posts"} />
 
       {!authData && <HeaderUnLoggedComponent />}
 
@@ -29,5 +29,5 @@ export const HeaderComponent = () => {
         <HeaderForAdminComponent />
       )}
     </header>
-  );
-};
+  )
+}

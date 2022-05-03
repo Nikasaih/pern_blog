@@ -27,8 +27,11 @@ export class PostModel extends Model {
     return PostModel.query().deleteById(id);
   }
 
-  static async publishById(id) {
+  static async publishById(id, authId) {
     const post = await PostModel.query().findById(id);
+    if (post.id !== authId) {
+      return;
+    }
     return PostModel.query().updateAndFetchById(id, {
       ...post,
       publicatedAt: currentDateTime(),

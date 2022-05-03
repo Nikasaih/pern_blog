@@ -1,20 +1,20 @@
-import styles from "../styles/Home.module.css";
-import React, { useState, useEffect } from "react";
-import { DisplayPostComponent } from "../components/post/DisplayPostComponent.jsx";
-import { getAllPostRequest } from "../api/requests/postRequest.js";
-import Link from "next/link";
+import styles from "../styles/Home.module.css"
+import React, { useState, useEffect } from "react"
+import { DisplayPostComponent } from "../components/post/DisplayPostComponent.jsx"
+import { getAllPostRequest } from "../api/requests/postRequest.js"
+import Link from "next/link"
 
 const Index = () => {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState()
 
   const loadPosts = async () => {
-    const response = await getAllPostRequest();
-    setPosts(response.data);
-  };
+    const response = await getAllPostRequest()
+    setPosts(response.data)
+  }
 
   useEffect(() => {
-    loadPosts();
-  }, []);
+    loadPosts()
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -34,7 +34,7 @@ const Index = () => {
           </div>
         ))}
     </div>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index

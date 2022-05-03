@@ -54,7 +54,6 @@ export class UserModel extends Model {
     const user = await UserModel.query().findById(id);
 
     const suspensionAmount = user.suspensionAmount + 1;
-    console.log(suspensionAmount);
     return UserModel.query()
       .findById(id)
       .patch({

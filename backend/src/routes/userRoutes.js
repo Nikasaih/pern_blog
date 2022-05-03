@@ -18,7 +18,8 @@ const userRoutes = ({ app }) => {
       return;
     }
 
-    res.send(await UserModel.getAllUser());
+    const users = await UserModel.getAllUser();
+    res.send(users.filter((user) => user.id !== auth.id));
   });
 
   app.post("/register", async (req, res) => {

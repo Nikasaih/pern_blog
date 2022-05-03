@@ -1,11 +1,9 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export const HeaderForAdminComponent = () => {
   return (
     <>
-      <Link href="/admin/manage-user">
-        <a>Admin </a>
-      </Link>
+      <HeaderLinkComponent href={"/admin/manage-user"} text={"Admin"} />
     </>
-  );
-};
+  )
+}

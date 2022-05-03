@@ -5,8 +5,12 @@ export const createNewPostRoute = rootPostRoute;
 export const getAllPostRoute = rootPostRoute;
 
 export const getOnePostByIdRoute = (id) => {
-  return `${getAllPostRoute}/${id}`;
+  return `${rootPostRoute}/${id}`;
 };
 export const deleteOnePostByIdRoute = (id) => {
-  return `${getAllPostRoute}/${id}`;
+  return `${rootPostRoute}/${id}`;
+};
+
+export const publishById = (id) => {
+  return `${rootPostRoute}/publishById/${id}`;
 };

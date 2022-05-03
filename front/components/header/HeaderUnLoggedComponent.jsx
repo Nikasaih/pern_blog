@@ -1,14 +1,11 @@
-import Link from "next/link";
+import Link from "next/link"
+import { HeaderLinkComponent } from "./HeaderLinkComponent.jsx"
 
 export const HeaderUnLoggedComponent = () => {
   return (
     <>
-      <Link href="/register">
-        <a>[[Register||</a>
-      </Link>
-      <Link href="/sign-in">
-        <a>||Login||</a>
-      </Link>
+      <HeaderLinkComponent href={"/register"} text={"Register"} />
+      <HeaderLinkComponent href={"/sign-in"} text={"Sign-in"} />
     </>
-  );
-};
+  )
+}

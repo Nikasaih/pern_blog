@@ -42,7 +42,27 @@ const postRoutes = ({ app }) => {
     res.status(201).send(created);
   });
 
-  //Todo publishPostByid
+  app.get("/posts/publishById/:postId", jwtAuthMidleware, async (req, res) => {
+    const {
+      auth,
+      params: { postId },
+    } = req;
+    if (!hasAuthorAuthority(auth.role)) {
+      res.status(401);
+      return;
+    }
+
+    const updated = await PostModel.publishById(
+      parseInt(postId),
+      parseInt(auth.id)
+    );
+    if (!updated) {
+      res.status(401).send(updated);
+      return;
+    }
+
+    res.status(202).send(updated);
+  });
 
   app.delete("/posts/:postId", async (req, res) => {
     const {

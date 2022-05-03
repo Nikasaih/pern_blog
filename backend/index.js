@@ -13,8 +13,10 @@ const db = knex(knexfile);
 Model.knex(db);
 
 app.use(json());
+
 app.use(
   cors({
+    //todo change this
     origin: "*",
   })
 );

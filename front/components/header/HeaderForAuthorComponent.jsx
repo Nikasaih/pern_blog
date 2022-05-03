@@ -1,11 +1,13 @@
-import Link from "next/link";
+import Link from "next/link"
+import { HeaderLinkComponent } from "./HeaderLinkComponent.jsx"
 
 export const HeaderForAuthorComponent = () => {
   return (
     <>
-      <Link href="/author/create-post">
-        <a>Create new post</a>
-      </Link>
+      <HeaderLinkComponent
+        href={"/author/create-post"}
+        text={"Create new post"}
+      />
     </>
-  );
-};
+  )
+}
